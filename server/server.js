@@ -18,6 +18,7 @@ app.use(cors(corsOptions)); // this enables CORS across all origins based on the
 app.use(session({
     secret: config.sessionSecret
 }));
+// __dirname is a  node built in method that is the name of the directory our server is being run from. This just help to make srue the correct files are being served
 app.use(express.static(__dirname + '/public')); // this will send all of our static front-end files from our server. We no longer need a live server
 
 // ========== ENDPOINTS ===============
