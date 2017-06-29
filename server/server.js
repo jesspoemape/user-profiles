@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
 const config = require('./config');
+const pc = require('./controllers/profileCtrl');
+const uc = require('./controllers/userCtrl');
 
 const app = express();
 
@@ -16,8 +18,11 @@ app.use(cors(corsOptions)); // this enables CORS across all origins based on the
 app.use(session({
     secret: config.sessionSecret
 }));
+app.use(express.static(__dirname + '/public')); // this will send all of our static front-end files from our server. We no longer need a live server
 
-
+// ========== ENDPOINTS ===============
+app.post('/api/login', uc.login);
+app.get('/api/profiles', pc.getFriendsProfiles);
 
 
 app.listen(3000, () => {
